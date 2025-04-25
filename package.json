@@ -15,18 +15,18 @@
     "react-dom": "^18.2.0",
     "react-icons": "^4.7.1",
     "react-router-dom": "^6.6.2",
-    "react-scripts": "5.0.1",
     "uuid": "^9.0.0",
     "web-vitals": "^3.1.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "server": "json-server --watch db.json --port 5000",
-    "dev": "concurrently \"npm run server\" \"npm start\""
-  },
+  "start": "vite",               
+  "dev": "vite",                  
+  "build": "vite build",         
+  "preview": "vite preview",      
+  "test": "vitest",               
+  "server": "json-server --watch db.json --port 5000",
+  "dev:full": "concurrently \"npm run server\" \"npm run dev\""  
+},
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -44,5 +44,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.4.1",
+    "vite": "^6.3.3"
   }
 }
