@@ -62,27 +62,29 @@ function FeedbackForm() {
   }
 
   // NOTE: pass selected to RatingSelect so we don't need local duplicate state
-  return (
-    <Card>
-      <form onSubmit={handleSubmit}>
-        <h2>How would you rate your service with us?</h2>
-        <RatingSelect select={setRating} selected={rating} />
-        <div className='input-group'>
-          <input
-            onChange={handleTextChange}
-            type='text'
-            placeholder='Write a review'
-            value={text}
-          />
-          <Button type='submit' isDisabled={btnDisabled}>
-            Send
-          </Button>
-        </div>
-
-        {message && <div className='message'>{message}</div>}
-      </form>
-    </Card>
-  )
+ // In your FeedbackForm.jsx component
+return (
+  <Card>
+    <form onSubmit={handleSubmit}>
+      <h2>How would you rate your service with us?</h2>
+      <RatingSelect select={setRating} selected={rating} />
+      <div className='input-group'>
+        <input
+          onChange={handleTextChange}
+          type='text'
+          placeholder='Write a review'
+          value={text}
+        />
+      </div>
+      <div className='button-container'>
+        <Button type='submit' isDisabled={btnDisabled}>
+          Send
+        </Button>
+      </div>
+      {message && <div className='message'>{message}</div>}
+    </form>
+  </Card>
+)
 }
 
 export default FeedbackForm

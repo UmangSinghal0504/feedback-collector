@@ -1,33 +1,51 @@
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import Toggle from './Toggle'
 
-function Header({ text, bgColor, textColor }) {
-  const headerStyles = {
-    backgroundColor: bgColor,
-    color: textColor,
-  }
+function Header({ text }) {
+  const [darkMode, setDarkMode] = useState(false)
 
   return (
-    <header style={headerStyles}>
-      <div className='container'>
-        <Link to='/' style={{ textDecoration: 'none', color: '#ff6a95' }}>
-          <h2>{text}</h2>
+    <header style={{
+      backgroundColor: 'var(--body-bg)',
+      color: 'var(--text-color)',
+      padding: '1rem 2rem',
+      position: 'relative'
+    }}>
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        maxWidth: '768px',
+        margin: '0 auto'
+      }}>
+        <Link to='/' style={{
+          textDecoration: 'none',
+          color: 'var(--link-color)'
+        }}>
+          <h2 style={{ margin: 0 }}>{text}</h2>
         </Link>
+        
+        <div style={{
+          position: 'absolute',
+          right: '2rem',
+          top: '50%',
+          transform: 'translateY(-50%)'
+        }}>
+          <Toggle darkMode={darkMode} setDarkMode={setDarkMode} />
+        </div>
       </div>
     </header>
   )
 }
 
 Header.defaultProps = {
-  text: 'Feedback UI',
-  bgColor: 'rgba(0,0,0,0.4)',
-  textColor: '#ff6a95',
+  text: 'Feedback UI'
 }
 
 Header.propTypes = {
-  text: PropTypes.string,
-  bgColor: PropTypes.string,
-  textColor: PropTypes.string,
+  text: PropTypes.string
 }
 
 export default Header
