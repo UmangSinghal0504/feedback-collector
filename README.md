@@ -19,6 +19,36 @@
 - HTTP requests
 - Dark/Light theme toggling
 
+  
+## 🚀 Deployment Steps
+
+### 1. **Netlify Setup**
+- Sign in to [Netlify](https://app.netlify.com/)
+- Select "Add new site" → "Import an existing project"
+- Connect your GitHub/GitLab repository
+
+### 2. **Configure Build Settings**
+```yaml
+Build command: npm run build
+Publish directory: dist
+Functions directory: netlify/functions
+3. Environment Variables
+Go to Site settings → Environment variables
+
+Add if needed:
+
+VITE_API_URL = /.netlify/functions
+4. Deploy
+Netlify will auto-deploy when pushing to main branch
+
+For manual deploy: Trigger "Deploy site" in Netlify dashboard
+
+🔧 Local Development
+bash
+npm install
+npm run dev  # Starts Vite dev server
+netlify dev  # Simulates Netlify environment
+
 ## Installation
 
 ```bash
