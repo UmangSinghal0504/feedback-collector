@@ -58,8 +58,8 @@ function FeedbackForm() {
       setBtnDisabled(true)
       setRating(10)
       setText('')
-      setName('')    // ✅ Reset name
-      setEmail('')   // ✅ Reset email
+      setName('')    
+      setEmail('')   
     }
   }
 

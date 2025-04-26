@@ -5,7 +5,7 @@ exports.handler = async (event) => {
   const id = event.path.split('/').pop();
   const feedbacksPath = path.join('/tmp', 'feedbacks.json');
 
-  // Add to the beginning of each function
+  
 if (!fs.existsSync('/tmp/feedbacks.json')) {
     fs.writeFileSync('/tmp/feedbacks.json', '[]');
   }

@@ -1,4 +1,4 @@
-// netlify/functions/submit-feedback.js
+
 const fs = require('fs');
 const path = require('path');
 
@@ -6,7 +6,7 @@ exports.handler = async (event) => {
     const newFeedback = JSON.parse(event.body);
     const feedbacksPath = path.join('/tmp', 'feedbacks.json');
     
-    // Ensure directory exists
+    
     if (!fs.existsSync(path.dirname(feedbacksPath))) {
       fs.mkdirSync(path.dirname(feedbacksPath), { recursive: true });
     }
@@ -17,7 +17,7 @@ exports.handler = async (event) => {
         feedbacks = JSON.parse(fs.readFileSync(feedbacksPath));
       }
       
-      // In submit-feedback.js
+     
 const feedbackWithId = { 
     ...newFeedback, 
     id: Date.now(),
