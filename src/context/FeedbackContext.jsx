@@ -14,29 +14,23 @@ export const FeedbackProvider = ({ children }) => {
     fetchFeedback()
   }, [])
 
-  // Fetch feedback
-  const fetchFeedback = async () => {
-    const response = await fetch(`http://localhost:5000/feedback?_sort=id&_order=desc`)
-    const data = await response.json()
+ // Fetch feedbacks
+const fetchFeedback = async () => {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/get-feedbacks`);
+  const data = await response.json();
+  setFeedback(data);
+};
 
-    setFeedback(data)
-    setIsLoading(false)
-  }
-
-  // Add feedback
-  const addFeedback = async (newFeedback) => {
-    const response = await fetch('http://localhost:5000/feedback', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newFeedback),
-    })
-
-    const data = await response.json()
-
-    setFeedback([data, ...feedback])
-  }
+// Add feedback
+const addFeedback = async (newFeedback) => {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/submit-feedback`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(newFeedback),
+  });
+  const data = await response.json();
+  setFeedback([data, ...feedback]);
+};
 
   // Delete feedback
   const deleteFeedback = async (id) => {
