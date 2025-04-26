@@ -2,18 +2,18 @@ const FeedbackData = [
   {
     id: 1,
     rating: 10,
-    text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. consequuntur vel vitae commodi alias voluptatem est voluptatum ipsa quae.',
+    text: 'Excellent service! The team went above and beyond to solve my issue quickly.',
   },
   {
     id: 2,
     rating: 9,
-    text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. consequuntur vel vitae commodi alias voluptatem est voluptatum ipsa quae.',
+    text: 'Very good experience overall, just had one small hiccup during onboarding.',
   },
   {
     id: 3,
     rating: 8,
-    text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. consequuntur vel vitae commodi alias voluptatem est voluptatum ipsa quae.',
-  },
+    text: 'Solid product with great features. Customer support was responsive.',
+  }
 ]
 
 export default FeedbackData
