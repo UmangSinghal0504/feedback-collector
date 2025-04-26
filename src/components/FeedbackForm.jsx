@@ -9,58 +9,81 @@ function FeedbackForm() {
   const [rating, setRating] = useState(10)
   const [btnDisabled, setBtnDisabled] = useState(true)
   const [message, setMessage] = useState('')
-  const [name, setName] = useState('')       // ✅ Added name state
-  const [email, setEmail] = useState('')     // ✅ Added email state
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [errors, setErrors] = useState({})
 
-  const { addFeedback, feedbackEdit, updateFeedback } =
-    useContext(FeedbackContext)
+  const { addFeedback, feedbackEdit, updateFeedback } = useContext(FeedbackContext)
 
   useEffect(() => {
     if (feedbackEdit.edit === true) {
       setBtnDisabled(false)
       setText(feedbackEdit.item.text)
       setRating(feedbackEdit.item.rating)
-      setName(feedbackEdit.item.name || '')    // optional chaining
-      setEmail(feedbackEdit.item.email || '')  // optional chaining
+      setName(feedbackEdit.item.name || '')
+      setEmail(feedbackEdit.item.email || '')
     }
   }, [feedbackEdit])
 
+  const validateForm = () => {
+    const newErrors = {}
+    
+    if (!name.trim()) {
+      newErrors.name = 'Name is required'
+    } else if (name.length < 2) {
+      newErrors.name = 'Name must be at least 2 characters'
+    }
+    
+    if (!email.trim()) {
+      newErrors.email = 'Email is required'
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      newErrors.email = 'Please enter a valid email'
+    }
+    
+    if (!text.trim()) {
+      newErrors.text = 'Feedback is required'
+    } else if (text.trim().length < 10) {
+      newErrors.text = 'Feedback must be at least 10 characters'
+    }
+    
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
+
   const handleTextChange = ({ target: { value } }) => {
-    if (value === '') {
-      setBtnDisabled(true)
+    setText(value)
+    if (value.trim().length >= 10) {
       setMessage(null)
-    } else if (value.trim().length < 10) {
+      setBtnDisabled(!validateForm())
+    } else {
       setMessage('Text must be at least 10 characters')
       setBtnDisabled(true)
-    } else {
-      setMessage(null)
-      setBtnDisabled(false)
     }
-    setText(value)
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (text.trim().length > 10) {
-      const newFeedback = {
-        text: text.trim(),
-        rating: rating,
-        name: name.trim(),     // ✅ Added name
-        email: email.trim(),   // ✅ Added email
-      }
+    if (!validateForm()) return
 
-      if (feedbackEdit.edit === true) {
-        updateFeedback(feedbackEdit.item.id, newFeedback)
-      } else {
-        addFeedback(newFeedback)
-      }
-
-      setBtnDisabled(true)
-      setRating(10)
-      setText('')
-      setName('')    
-      setEmail('')   
+    const newFeedback = {
+      text: text.trim(),
+      rating,
+      name: name.trim(),
+      email: email.trim(),
     }
+
+    if (feedbackEdit.edit === true) {
+      updateFeedback(feedbackEdit.item.id, newFeedback)
+    } else {
+      addFeedback(newFeedback)
+    }
+
+    setBtnDisabled(true)
+    setRating(10)
+    setText('')
+    setName('')
+    setEmail('')
+    setErrors({})
   }
 
   return (
@@ -75,7 +98,9 @@ function FeedbackForm() {
             placeholder='Your Name'
             value={name}
             onChange={(e) => setName(e.target.value)}
+            className={errors.name ? 'border-red-500' : ''}
           />
+          {errors.name && <p className='text-red-500 text-xs mt-1'>{errors.name}</p>}
         </div>
 
         <div className='input-group'>
@@ -84,8 +109,9 @@ function FeedbackForm() {
             placeholder='Email Address'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            required
+            className={errors.email ? 'border-red-500' : ''}
           />
+          {errors.email && <p className='text-red-500 text-xs mt-1'>{errors.email}</p>}
         </div>
 
         <div className='input-group'>
@@ -94,7 +120,9 @@ function FeedbackForm() {
             type='text'
             placeholder='Write a review'
             value={text}
+            className={errors.text ? 'border-red-500' : ''}
           />
+          {errors.text && <p className='text-red-500 text-xs mt-1'>{errors.text}</p>}
         </div>
 
         <div className='button-container'>

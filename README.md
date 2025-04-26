@@ -1,6 +1,6 @@
 ## Features
 
-- ✨ Add, edit, and delete feedback items
+- ✨ Name,Email,Add, edit, and delete feedback items
 - ⭐ Rate services from 1-10 stars
 - 🌓 Dark/Light mode toggle 
 - 📱 Fully responsive design

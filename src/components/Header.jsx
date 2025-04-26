@@ -5,7 +5,7 @@ import Toggle from './Toggle'
 
 function Header({ text }) {
   const [darkMode, setDarkMode] = useState(false)
-
+  
   return (
     <header style={{
       backgroundColor: 'var(--body-bg)',
