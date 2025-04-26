@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Header from './components/Header'
 import FeedbackList from './components/FeedbackList'
@@ -7,17 +7,12 @@ import FeedbackForm from './components/FeedbackForm'
 import AboutIconLink from './components/AboutIconLink'
 import AboutPage from './pages/AboutPage'
 import { FeedbackProvider } from './context/FeedbackContext'
+import Footer from './components/Footer'
 
 function App() {
-  const [darkMode, setDarkMode] = useState(false)
-
   useEffect(() => {
-    useEffect(() => {
-      console.log('API BASE URL:', import.meta.env.VITE_API_URL);
-    }, []);
     // Initialize theme
     const savedMode = localStorage.getItem('darkMode') === 'true'
-    setDarkMode(savedMode)
     document.documentElement.classList.toggle('dark', savedMode)
   }, [])
 
@@ -37,6 +32,7 @@ function App() {
             <Route path='/about' element={<AboutPage />} />
           </Routes>
           <AboutIconLink />
+          <Footer />
         </div>
       </Router>
     </FeedbackProvider>

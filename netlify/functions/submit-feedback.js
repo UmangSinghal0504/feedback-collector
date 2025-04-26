@@ -17,11 +17,14 @@ exports.handler = async (event) => {
         feedbacks = JSON.parse(fs.readFileSync(feedbacksPath));
       }
       
-      const feedbackWithId = { 
-        ...newFeedback, 
-        id: Date.now(),
-        date: new Date().toISOString() 
-      };
+      // In submit-feedback.js
+const feedbackWithId = { 
+    ...newFeedback, 
+    id: Date.now(),
+    date: new Date().toISOString(),
+    name: newFeedback.name,
+    email: newFeedback.email
+  };
       
       fs.writeFileSync(feedbacksPath, JSON.stringify([...feedbacks, feedbackWithId]));
       

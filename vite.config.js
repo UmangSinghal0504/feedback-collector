@@ -5,7 +5,11 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/.netlify/functions': 'http://localhost:8888'  // Proxy to Netlify Dev
+      '/api': {
+        target: 'http://localhost:8888/.netlify/functions',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '')
+      }
     }
   }
 });
