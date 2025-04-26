@@ -12,6 +12,9 @@ function App() {
   const [darkMode, setDarkMode] = useState(false)
 
   useEffect(() => {
+    useEffect(() => {
+      console.log('API BASE URL:', import.meta.env.VITE_API_URL);
+    }, []);
     // Initialize theme
     const savedMode = localStorage.getItem('darkMode') === 'true'
     setDarkMode(savedMode)

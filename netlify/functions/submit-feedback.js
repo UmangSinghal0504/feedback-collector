@@ -4,7 +4,7 @@ const path = require('path');
 
 exports.handler = async (event) => {
     const newFeedback = JSON.parse(event.body);
-    const feedbacksPath = path.join(process.cwd(), 'netlify', 'data', 'feedbacks.json');
+    const feedbacksPath = path.join('/tmp', 'feedbacks.json');
     
     // Ensure directory exists
     if (!fs.existsSync(path.dirname(feedbacksPath))) {

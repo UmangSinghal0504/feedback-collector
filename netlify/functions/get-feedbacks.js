@@ -2,10 +2,11 @@ const fs = require('fs');
 const path = require('path');
 
 exports.handler = async () => {
-    const feedbacksPath = path.join(process.cwd(), 'netlify', 'data', 'feedbacks.json');
-    if (!fs.existsSync(feedbacksPath)) {
-        fs.writeFileSync(feedbacksPath, '[]'); // Create with empty array
-    }
+    const feedbacksPath = path.join('/tmp', 'feedbacks.json');
+    // Add to the beginning of each function
+if (!fs.existsSync('/tmp/feedbacks.json')) {
+    fs.writeFileSync('/tmp/feedbacks.json', '[]');
+  }
     
     try {
         const feedbacks = JSON.parse(fs.readFileSync(feedbacksPath));
